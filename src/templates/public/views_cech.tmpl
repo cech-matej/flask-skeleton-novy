@@ -1,0 +1,11 @@
+{% extends "shared/layout.tmpl" %}
+{% block title %}LIST{% endblock %}
+{% block content %}
+<table>
+    {% for n in data %}
+        <tr><td bgcolor="black">{{ n[0] }}</td>
+        <td>{{ n[1] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
