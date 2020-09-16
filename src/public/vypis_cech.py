@@ -4,4 +4,4 @@ from .views import blueprint
 def vypis_cech():
         pole=[[0,1],[2,3],[0,30]]
         pole[0][1]=pole[0][1]+1
-        return render_template("public/vypis_cech.tmpl",data =pole)
+        return render_template("public/views_cech.tmpl",data =pole)
