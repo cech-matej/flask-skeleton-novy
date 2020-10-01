@@ -2,9 +2,10 @@
 Logic for dashboard related routes
 """
 from flask import Blueprint, render_template
-from .forms import LogUserForm, secti,masoform, ocform
+from .forms import LogUserForm, secti, masoform, ocform
 from ..data.database import db
-from ..data.models import LogUser
+from ..data.models import LogUser, Stock
+from math import pow
 blueprint = Blueprint('public', __name__)
 
 @blueprint.route('/', methods=['GET'])
@@ -41,5 +42,26 @@ def masof():
 def ocapp():
     form = ocform()
     if form.validate_on_submit():
-        return "OK"
+        if form.obrazec.data=="1":
+            prom=str(pow(form.a.data, 2))
+            return  render_template("public/ocvystup.tmpl", prom=prom)
     return render_template("public/ocformular.tmpl", form=form)
+
+@blueprint.route('/simple_chart')
+def chart():
+    legend = 'Monthly data'
+    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
+    values = [10, 9, 8, 7, 6, 4, 7, 8]
+    return render_template('public/graf.tmpl', legend=legend, labels=labels, values=values)
+
+@blueprint.route('/vloz_radek')
+def vloz_radek():
+    text = "asdfsdfgd"
+    Stock.create(firma='Autocont', firma_zkratka='xxx',\
+                        jmenovita_hodnota=100, posledni_cena=101)
+    return 'OK'
+
+@blueprint.route('/vypis_table')
+def vypis_table():
+    pole=Stock.vypis_spolecny_radek()
+    return render_template('public/vypis_tabulky.tmpl', pole=pole)
