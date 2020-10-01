@@ -1,4 +1,4 @@
-{% from "macros/fields.tmpl" import render_input_field,render_checkbox_field, render_submit, render_input_choice %}
+{% from "macros/fields.tmpl" import render_input_choice,render_input_field,render_checkbox_field, render_submit %}
 {% extends "shared/layout.tmpl" %}
 
 {% block title %}Forgotten password{% endblock %}
@@ -10,7 +10,7 @@
     {{ form.hidden_tag() }}
       {{ render_input_field(form.a) }}
       {{ render_input_field(form.b) }}
-    {{ render_input_choice(form.obrazec) }}
+      {{ render_input_choice(form.obrazec) }}
     {{ render_submit() }}
   </form>
 {% endblock %}
